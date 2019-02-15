@@ -1,0 +1,32 @@
+header.header
+	.container
+		.header__item.header__item-logo
+			a.logo(href="/")
+				img(src="img/logo.png")
+		.header__item.header__item-burger
+			.burger.js-burger
+				button.burger__btn
+					span.burger__label меню
+		.header__item.header__item-nav.js-header-nav
+			nav.nav
+				ul.nav__list
+					li.nav__item
+						a.nav__link(href="#")
+							span Для кого
+					li.nav__item
+						a.nav__link(href="#")
+							span Программа курса
+					li.nav__item
+						a.nav__link(href="#")
+							span Подробности
+					li.nav__item
+						a.nav__link(href="#")
+							span Отзывы
+					li.nav__item
+						a.nav__link(href="#")
+							span Подать заявку
+		.header__item.header__item-phone
+			a.phone(href="tel:+79615128172")
+				span +7 961 512-81-72
+			a.callback.js-show_md_callback(data-modal="md-callback")
+				span Перезвоните мне

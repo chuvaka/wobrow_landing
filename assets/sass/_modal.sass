@@ -1,0 +1,110 @@
+.md
+	position: fixed
+	top: 0
+	left: 0
+	width: 100%
+	min-height: 100%
+	display: none
+	z-index: 0
+	overflow-x: hidden
+	&._show
+		display: block
+		z-index: 1000
+	&__overlay
+		position: fixed
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		z-index: 1
+	&__container
+		position: absolute
+		top: 0
+		left: 0
+		width: 100%
+		min-height: 100%
+		background-color: rgba(0,0,0,.85)
+		padding: 35px 0
+		-webkit-transition: top .25s
+		transition: top .25s
+	&__inner
+		position: relative
+		background-color: #ffffff
+		margin: 0 auto
+		padding: 60px 65px 35px
+		width: 100%
+		max-width: 780px
+		z-index: 2
+	&__header
+		position: relative
+		margin-bottom: 10px
+		text-align: center
+		z-index: 1
+	&__title
+		line-height: 1.2
+		margin: 0
+		font-size: 3rem
+		font-weight: bold
+	&__footer
+		position: relative
+		border-top: 1px solid rgba(0,0,0,.1)
+		margin-top: 25px
+		padding-top: 25px
+		z-index: 2
+		&-itogo
+			font-weight: 600
+			line-height: 1.2
+			& .rubl
+				&:after
+					content: '7'
+		&-note
+			color: rgba(0,0,0,.3)
+			font-size: 1.5rem
+			padding-top: 22px
+	&-close
+		position: absolute
+		top: 0
+		right: 0
+		width: 40px
+		height: 40px
+		background-image: url(data:image/svg+xml;base64,PHN2Zw0KICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIg0KICAgdmVyc2lvbj0iMS4xIg0KICAgdmlld0JveD0iMCAwIDIxIDIxIg0KICAgaGVpZ2h0PSIyMSINCiAgIHdpZHRoPSIyMSI+DQogIDxnDQogICAgIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTEwMzEuMzYyMikiPg0KICAgIDxyZWN0DQogICAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMC43MDcxMDY3OSwwLjcwNzEwNjc3LC0wLjcwNzEwNjc5LDAuNzA3MTA2NzcsMCwwKSINCiAgICAgICB5PSI3MjguNzgyNjUiDQogICAgICAgeD0iNzI5Ljc4Mzc1Ig0KICAgICAgIGhlaWdodD0iMS4wMDEwNTczIg0KICAgICAgIHdpZHRoPSIyOC42OTc0MjgiDQogICAgICAgc3R5bGU9ImZpbGw6I2ZmZjtmaWxsLW9wYWNpdHk6MTtzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6MS43MDAwMDAwNTtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5Om5vbmUiIC8+DQogICAgPHJlY3QNCiAgICAgICB0cmFuc2Zvcm09Im1hdHJpeCgtMC43MDc0ODAyOSwwLjcwNjczMzA3LC0wLjcwNzQ4MDI5LC0wLjcwNjczMzA3LDAsMCkiDQogICAgICAgeT0iLTc0NS4wMjYxOCINCiAgICAgICB4PSI3MTUuMzQzMzIiDQogICAgICAgaGVpZ2h0PSIxLjAwMDUyODgiDQogICAgICAgd2lkdGg9IjI4LjY4MjI3OCINCiAgICAgICBzdHlsZT0iZmlsbDojZmZmO2ZpbGwtb3BhY2l0eToxO3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDoxLjcwMDAwMDA1O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZSIgLz4NCiAgPC9nPg0KPC9zdmc+DQo=)
+		background-color: $btn_bg
+		background-position: center center
+		background-repeat: no-repeat
+		border: 0
+		text-indent: 9999px
+		outline: none
+		cursor: pointer
+		z-index: 10
+		transition: all .25s
+		&:hover
+			background-color: $btn_bg_hover
+
+.md-map
+	text-align: right
+	-webkit-transition: all .55s ease-in-out
+	transition: all .55s ease-in-out
+	& .md-close
+		display: none
+	& .md__container
+		display: inline-block
+		min-width: 1160px
+		max-width: 1160px
+		padding: 0
+	& .md__inner
+		padding: 0
+		max-width: 100%
+		text-align: left
+		right: -100%
+		-webkit-transition: right .55s cubic-bezier(.21,.86,.08,1)
+		transition: right .55s cubic-bezier(.21,.86,.08,1)
+	& .md__content
+		&-tabs
+			padding: 45px 30px 30px
+	&._show
+		& .md__inner
+			right: 0
+	& .md__content
+		& .map-modal
+			width: 100%
+			height: 600px

@@ -1,0 +1,243 @@
+.layout
+	position: relative
+	width: 100%
+
+.main
+	position: relative
+	width: 100%
+
+.author
+	position: relative
+	&__avatar
+		display: inline-block
+		vertical-align: middle
+		border-radius: 50%
+		border: 5px solid rgba(23, 95, 167, 1)
+		// box-shadow: 0 10px 35px rgba(23, 95, 167, .35)
+		margin-bottom: 2rem
+		height: 150px
+		width: 150px
+		& img
+			width: 100%
+			height: 100%
+	&__name
+		font-family: $ff3
+		font-size: 3rem
+		margin: 1rem 0
+	&__info
+		display: inline-block
+		vertical-align: top
+		max-width: 65rem
+
+.bl-in-line
+	display: inline-block
+	vertical-align: middle
+	margin-left: -4px
+	&:first-child
+		margin-left: 0
+
+.price
+	background-color: #f9f9f9
+	border-radius: 4px
+	margin: 45px 0
+	padding: 15px 25px
+	&__item
+		position: relative
+		display: inline-block
+		vertical-align: middle
+		font-weight: 500
+		margin: 15px 0
+		&_old
+			font-size: 1.75rem
+			&:after
+				content: ''
+				position: absolute
+				display: block
+				left: -5%
+				top: 50%
+				margin-top: -1px 
+				height: 1px
+				width: 110%
+				background-color: $red
+
+		&_real
+			font-size: 2.75rem
+
+.b-stage
+	position: relative
+	margin: 0 auto
+	max-width: 960px
+	width: 100%
+.stage
+	&__item
+		position: relative
+		border-bottom: 1px solid #e0e0e0
+		padding: 32px 40px
+		margin-bottom: 3rem
+		&-header
+			position: relative
+			width: 100%
+			&:hover
+				cursor: pointer
+				.stage__item-title
+					color: $link_color_hover
+		&-day
+			display: inline-block
+			vertical-align: middle
+			color: #acacac
+			font-size: 1.15rem
+			font-weight: 300
+			margin-right: 5px
+		&-title
+			display: inline-block
+			vertical-align: middle
+			font-size: 2.75rem
+			font-weight: 500
+		&-arrow
+			position: absolute
+			top: 50%
+			right: 0
+			margin-top: -12px
+			height: 24px
+			width: 24px
+			-webkit-transition: -webkit-transform 0.175s
+			transition: transform 0.175s
+			-webkit-transform: rotate(180deg)
+			transform: rotate(180deg)
+			-webkit-transform-origin: center
+			transform-origin: center
+			display: block
+			& svg
+
+		&-list
+			margin-top: 25px
+			& li
+				text-align: left
+				margin: 1.25rem 0
+		&-content
+			height: 0
+			overflow: hidden
+		&.active
+			background-color: #ffffff
+		&.active &-title
+			color: $link_color_hover
+		&.active &-content
+			height: auto
+		&.active &-arrow
+			-webkit-transform: rotate(0)
+			transform: rotate(0)
+
+
+
+.blog
+	&__date
+		color: #9f9f9f
+		font-size: 1.35rem
+		&_center
+			text-align: center
+	&__info
+		color: #757575
+		font-size: 1.15rem
+		text-align: center
+		margin: 1rem 0 5.5rem
+		& span
+			display: inline-block
+			font-weight: 500
+			margin: 0 .75rem
+	&__author
+		letter-spacing: .15rem
+		text-transform: uppercase
+	&__content
+		color: #7a7f84
+		& .txt
+			max-width: 78rem
+			width: 100%
+			margin: 1.5rem auto
+			padding: 0 1.5rem
+			&:before, &:after
+				clear: both
+				content: ''
+				display: block
+				font-size: 0
+				line-height: 0
+				width: 100%
+		& .column
+			float: left
+			padding: 0 1.5rem
+			width: 50%
+		& img
+			margin: 0 auto
+		& blockquote
+			display: block
+			border-top: 2px solid #e9e9e9
+			border-bottom: 2px solid #e9e9e9
+			color: #212121
+			font-family: $ff2
+			font-size: 2.25rem
+			line-height: 1.5
+			margin: 4.5rem auto
+			padding: 3.5rem 6.5rem
+			text-align: center
+			width: 96rem
+
+
+
++keyframes(fadeUp)
+	0%
+		opacity: 0
+		transform: translate3d(0, 30px, 0)
+	100%
+		transform: translate3d(0, 0, 0)
+
+// иконки соц. сетей
+.social
+	display: inline-block
+	vertical-align: top
+	margin: 0
+	padding: 0
+	&__item
+		display: inline-block
+		vertical-align: middle
+		margin-left: 20px 
+		height: 18px
+		width: 18px
+		&:first-child
+			margin-left: 0
+		& a
+			display: block
+			border: 0
+			& svg
+				width: 100%
+				height: 100%
+				fill: $c_default
+				-webkit-transition: fill .35s
+				-o-transition: fill .35s
+				transition: fill .35s
+			&:hover
+				& svg
+					fill: $link_color_hover
+
+.chain__list
+	margin: 0
+	padding: 0
+.chain__item
+	display: inline-block
+	vertical-align: middle
+	color: $c_default
+	font-size: 10px
+	font-weight: 300
+	text-transform: uppercase
+	&:last-child
+		margin-right: 0
+.chain__item + .chain__item:before
+	content: '/'
+	display: inline-block
+	vertical-align: middle
+	margin-right: 4px
+.chain__link
+	display: inline-block
+	vertical-align: middle
+	border: none
+	color: $nav_link
+	.chain__link:hover
+		color: $nav_link_hover

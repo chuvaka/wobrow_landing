@@ -1,0 +1,117 @@
+.section
+	position: relative
+	padding: 2.5rem 0 4.5rem
+	width: 100%
+	z-index: 10
+	& .btn
+		margin-top: 25px
+	&__ttl
+		margin-bottom: 25px
+	& .content
+		position: relative
+		width: 100%
+		z-index: 5
+	&_center
+		text-align: center
+	&_hello
+		background: url('../img/cover.png') top center no-repeat fixed
+		background-size: cover
+		padding: 13rem 0 5rem
+		& .hello-video
+			position: relative
+			background: $link_color url('../img/video-cover.jpg') top center no-repeat
+			background-size: cover
+			border-radius: 2px
+			line-height: 0
+			height: 210px
+			margin-bottom: 25px
+			overflow: hidden
+			&:before
+				content: ''
+				position: absolute
+				top: 0
+				left: 0
+				width: 100%
+				height: 100%
+				background: -moz-linear-gradient(45deg, rgba(0, 102, 255, .75) 0%, rgba(0, 71, 179, .25) 100%)
+				background: -webkit-linear-gradient(45deg, rgba(0, 102, 255, .75) 0%, rgba(0, 71, 179, .25) 100%)
+				background: linear-gradient(45deg, rgba(0, 102, 255, .75) 0%, rgba(0, 71, 179, .25) 100%)
+				opacity: .75
+				z-index: 1
+				transition: opacity .35s
+			& .btn-play
+				position: absolute
+				top: 50%
+				left: 50%
+				margin-left: -38px
+				margin-top: -38px
+				z-index: 2
+			&:hover
+				cursor: pointer
+				&:before
+					opacity: .5
+				& .btn-play
+					-webkit-transform: scale(1.079)
+					-ms-transform: scale(1.079)
+					transform: scale(1.079)
+					& svg
+						fill: $link_color_hover
+	&_second
+		background-color: #232731
+		color: #ffffff
+		padding: 5rem 0 5rem
+		& .subttl
+			font-size: 2rem
+			font-weight: 400
+	&_program, &_get
+		padding: 2.5rem 0 3.5rem
+		& .content
+			margin: 3rem auto
+			max-width: 65rem
+	&_for
+		padding: 5rem 0
+		& .container
+			text-align: center
+			max-width: 850px
+		p
+			margin: 1.5rem 0
+	&_format
+		background-color: #f9f9f9
+		padding: 5rem 0
+		& .subttl
+			font-size: 2rem
+			font-weight: 400
+	&_teacher
+	&_price
+		& .container
+			max-width: 960px
+		& p
+			font-size: 1.75rem
+
+	&_slider
+		background-color: #292a33
+		height: 100vh
+		max-height: 800px
+
+.order
+	&__prices
+		background-color: #f9f9f9
+		border-radius: 4px
+		margin: 45px 0
+		padding: 15px 25px
+	&__price
+		font-size: 3.25rem
+		font-weight: bold
+		&-ttl
+			font-size: 1.75rem
+			font-weight: bold
+	&__row
+		display: table
+		width: 100%
+	&__item
+		display: table-cell
+		vertical-align: middle
+	&__form
+		margin-top: 45px
+	& p
+		margin-bottom: 0

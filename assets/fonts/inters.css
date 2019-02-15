@@ -1,0 +1,9 @@
+@font-face {
+	font-family: 'TTInters';
+	src: url('fonts/TTInters.eot');
+	src: url('fonts/TTInters.eot?#iefix') format('embedded-opentype'),
+		url('fonts/TTInters.woff') format('woff'),
+		url('fonts/TTInters.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}

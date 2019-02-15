@@ -1,0 +1,65 @@
+doctype html
+html
+	include inc/head
+	body
+		.layout
+			include inc/header
+			main.main
+				include inc/section_hello
+				include inc/section_2
+				include inc/section_for
+				include inc/section_course
+				section.section.section_center.section_teacher
+					.container
+						h2.ttl.ttl_h2 Курс ведет
+						.content
+							.author
+								.author__avatar
+									img(src="img/ava.png")
+								h3.author__name Рина Кудряшова
+								.author__info
+									p Мастер-бровист с опытом более 1000 процедур, опытный администратор и организатор салонов красоты с опытом более 6 лет. Призёр международных чемпионатов среди <b>brow-мастеров</b>
+							.instalenta лента из инстаграмма с самыми пиздатыми работами
+				section.section.section_center.section_reviews
+					.container
+						h2.ttl.ttl_h2 Отзывы
+						.content
+							p отзывы
+				section.section.section_price
+					.container
+						h2.ttl.ttl_h2 Набор открыт
+						.order__row.order__prices
+							.order__item.order__price-ttl.col-4
+								span Стоимость обучения
+							.order__item.order__price.col-4.txt-center
+								span 15 000 рублей
+							.order__item.order__price-ttl.col-4.txt-right
+								span старт курса с 1 марта
+						.order__row
+							.order__item.col-6
+								.order__item-txt Позвони и запишись на обучение, а также узнай как можно сэкономить до 30% по телефону
+							.order__item.col-6.txt-right
+								.ttl.ttl_phone
+									a(href="tel:+79615128172")
+										span +7 961 512-81-72
+						.order__form
+							form.form.form-order.js-form-order(action="/ajax/order.php" method="POST")
+								.form__group
+									.row
+										.col.col-4
+											.form__item
+												input.form-control.form__input._required(type="text" name="name" value="" _required data-type="text")
+												label.form__label Имя
+										.col.col-4
+											.form__item
+												input.form-control.form__input._required(type="text" name="phone" value="" _required data-type="phone")
+												label.form__label Телефон
+										.col.col-4
+											.form__item
+												input.form-control.form__input._required(type="text" name="email" value="" _required data-type="email")
+												label.form__label E-mail
+								.form__group.form__group-btn
+									button.btn.js-form-submit(type="submit")
+										span Записаться на обучение
+		include inc/footer
+		include inc/modal
