@@ -101,6 +101,7 @@
 	transition: transform 0.2s ease
 	fill: #000
 	&__btn
+		background-color: transparent
 		position: relative
 		display: -webkit-box
 		display: -webkit-flex
@@ -183,3 +184,8 @@
 			&-phone
 				float: none
 				text-align: center
+@media (max-width: 767px)
+	.header
+		&__item
+			&-phone
+				display: none

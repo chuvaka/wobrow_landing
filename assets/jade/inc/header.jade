@@ -1,29 +1,26 @@
-header.header
+header.header.js-header
 	.container
 		.header__item.header__item-logo
-			a.logo(href="/")
+			a.logo.js-logo(href="/")
 				img(src="img/logo.png")
 		.header__item.header__item-burger
 			.burger.js-burger
 				button.burger__btn
 					span.burger__label меню
 		.header__item.header__item-nav.js-header-nav
-			nav.nav
+			nav.nav.js-nav
 				ul.nav__list
 					li.nav__item
-						a.nav__link(href="#")
+						a.nav__link(href="#for" data-scrollto="for")
 							span Для кого
 					li.nav__item
-						a.nav__link(href="#")
+						a.nav__link(href="#programm" data-scrollto="programm")
 							span Программа курса
 					li.nav__item
-						a.nav__link(href="#")
+						a.nav__link(href="#details" data-scrollto="details")
 							span Подробности
 					li.nav__item
-						a.nav__link(href="#")
-							span Отзывы
-					li.nav__item
-						a.nav__link(href="#")
+						a.nav__link(href="#order" data-scrollto="order")
 							span Подать заявку
 		.header__item.header__item-phone
 			a.phone(href="tel:+79615128172")

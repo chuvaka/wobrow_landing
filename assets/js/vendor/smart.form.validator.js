@@ -1,6 +1,6 @@
 /**
- * Валидатор форм
- * @author Adam Defo
+ * Умный валидатор форм
+ * @author Aleksey Kondratyev
  */
 ;(function(window) {
 
@@ -8,57 +8,70 @@
 
 	var extend = function (a, b) {
 		for (var key in b) {
-			if (b.hasOwnProperty(key)) {
-				a[key] = b[key];
-			}
+			a[key] = b[key];
 		}
 		return a;
 	};
 
-	var SmartFormValidator = function (selector, params) {
-
-		this._params = extend({}, this._params);
-		extend(this._params, params);
+	/**
+	 * 
+	 * @param {*} selector селектор формы
+	 * @param {*} params наименование селекторов для контролов, лейблов и т.д.
+	 * @param {*} settings дополнительные настройки
+	 */
+	var SmartFormValidator = function (selector, params, settings) {
+		if (!this._checkSelector(selector)) {
+			return;
+		}
 
 		this.$el = document.querySelector(selector);
+
+		this._params = extend(this._params, params);
 
 		// лейблы у контролов
 		this.$formLabels = [].slice.call(this.$el.querySelectorAll(this._params.selectorFormLabels));
 
 		// инпуты, селекты, чекбоксы, радиобатоны
 		this.$formControls = [].slice.call(this.$el.querySelectorAll(this._params.selectorFormControls));
-		this.formControls = [];
+		this.inputs = {};
 
 		this.$submitBtn;
 
-		this.requiredElements = [];
-
 		this.errors = 0;
+
+		// console.log(this._params.customValidation)
 
 		this._init();
 	};
 
+	SmartFormValidator.prototype._checkSelector = function (selector) {
+		return document.querySelector(selector);
+	};
+
 	SmartFormValidator.prototype._params = {
 		selectorFormLabels: '.form__label',
-		selectorFormControls: '.form-control',
+		selectorFormControls: '.form__control',
+		selectorErrorDiv: '.form__error',
 		selectorSubmitBtn: '.js-form-submit',
 		classNameActive: 'form__item_active',
 		classNameFocused: 'form__item_focused',
 		classNameError: 'form__item_error',
+		defaultErrorText: 'необходимо заполнить',
+		customValidation: {},
+		displayError: false
+	};
+
+	SmartFormValidator.prototype._settings = {
+
 	};
 
 	SmartFormValidator.prototype._init = function () {
-		this._initFormLabels();
-		this._initFormElements();
+		this._initEventForLabels();
 		this._initSubmitBtn();
+		this._initFormCtrls();
 	};
 
-	SmartFormValidator.prototype._initSubmitBtn = function () {
-		this.$submitBtn = this.$el.querySelector(this._params.selectorSubmitBtn);
-		this.$submitBtn.disabled = true;
-	};
-
-	SmartFormValidator.prototype._initFormLabels = function () {
+	SmartFormValidator.prototype._initEventForLabels = function () {
 		var self = this;
 		this.$formLabels.forEach(function (label) {
 			self._addEventForLabel(label);
@@ -77,129 +90,158 @@
 		});
 	};
 
+	SmartFormValidator.prototype._initSubmitBtn = function () {
+		this.$submitBtn = this.$el.querySelector(this._params.selectorSubmitBtn);
+		this.$submitBtn.disabled = true;
+	};
+
+
 	// создаст для каждого элемента формы свой объект
-	SmartFormValidator.prototype._initFormElements = function () {
+	SmartFormValidator.prototype._initFormCtrls = function () {
 		var self = this;
 		this.$formControls.forEach(function (el, id) {
-			self.formControls.push(
-				{
+			if (!self.inputs.hasOwnProperty(el.name)) {
+				var input = {
 					id: id,
 					$el: el,
+					type: el.type, // text, select, checkbox
+					field: el.getAttribute('data-field'), // тип поля: телефон, email и т.д.
 					name: el.name,
 					value: el.value,
-					type: el.getAttribute('data-type'),
 					required: el.hasAttribute('_required'),
 					rule: null,
 					error: false,
 					changed: false, // прим. при валидации, чтобы не проставлять ошибку у других элементов, значение которых не менялось)
 					active: false, // инпут в фокусе или имеет значение
-					valid: false,
+					valid: false
 				}
-			);
-			self._addEvent(el);
+				self.inputs[el.name] = input
+			}
+
+			self._addInputEvent(el);
 		});
+
+		// console.log('_initinputs', this.inputs)ы
 	};
 
-	SmartFormValidator.prototype._findFormControl = function (name) {
-		for (var i = 0; i < this.formControls.length; i++) {
-			if (this.formControls[i].name === name) {
-				this.formControls[i].changed = true;
-				i = this.formControls.length;
-			}
+	SmartFormValidator.prototype._addInputEvent = function (el) {
+		var self = this;
+
+		if (el.type === 'text') {
+			el.addEventListener('focus', function () {
+				var parent = this.parentNode;
+				if (!classie.has(parent, self._params.classNameActive)) {
+					classie.add(parent, self._params.classNameActive);
+				}
+				if (!classie.has(parent, self._params.classNameFocused)) {
+					classie.add(parent, self._params.classNameFocused);
+				}
+			});
+			
+			el.addEventListener('keyup', function () {
+				self._setInputStatusChanged(this.name);
+				self._validate();
+			});
+	
+			el.addEventListener('blur', function () {
+				if (!this.value) {
+					var parent = this.parentNode;
+					classie.remove(parent, self._params.classNameActive);
+					classie.remove(parent, self._params.classNameFocused);
+				}
+			});
+		} else if (el.type === 'checkbox') {
+			el.addEventListener('change', function () {
+				self._validate();
+			});
 		}
 	};
 
-	SmartFormValidator.prototype._checkValueFormControl = function (ctrl) {
-		return ctrl.value;
+	SmartFormValidator.prototype._setInputStatusChanged = function (inputName) {
+		if (!this.inputs[inputName].changed) {
+			this.inputs[inputName].changed = true;
+		}
 	};
 
-	SmartFormValidator.prototype._addEvent = function (el) {
-		var self = this;
-
-		el.addEventListener('focus', function () {
-			var parent = this.parentNode;
-			if (!classie.has(parent, self._params.classNameActive)) {
-				classie.add(parent, self._params.classNameActive);
-			}
-			if (!classie.has(parent, self._params.classNameFocused)) {
-				classie.add(parent, self._params.classNameFocused);
-			}
-		});
-		
-		el.addEventListener('keyup', function () {
-			self._findFormControl(this.name);
-			self._validate();
-		});
-
-		el.addEventListener('blur', function () {
-			// self._validate();
-			if (!this.value) {
-				var parent = this.parentNode;
-				classie.remove(parent, self._params.classNameActive);
-				classie.remove(parent, self._params.classNameFocused);
-			}
-		});
-	};
-
+	// запускает валидацию инпутов и в случае успешной проверки разблокирует кнопку отправки формы
 	SmartFormValidator.prototype._validate = function () {
-		var self = this;
-		this.errors = 0;
-
-		this.formControls.filter(function (el) {
-			return el.required; 
-		}).forEach(function(el) {
-			if (!self._validateElement(el)) {
-				el.error = true;
-				el.valid = false;
-				self.errors++;
-			} else {
-				el.error = false;
-				el.valid = true;
+		for (var inputName in this.inputs) {
+			var input = this.inputs[inputName];
+			
+			if (input.required) {
+				// console.log(input.name, this._validateInput(input))
+				if (!this._validateInput(input)) {
+					input.error = true;
+					input.valid = false;
+				} else {
+					input.error = false;
+					input.valid = true;
+				}
 			}
-		});
+		}
 
 		this._outErrors();
 	};
 
-	SmartFormValidator.prototype._validateElement = function (el) {
-		switch (el.type) {
-			case 'email':
-				return (function(email) {
-					var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-						return reg.test(email);
-				})(el.$el.value);
+	// проверяет инпуты, в зависимости от их типа (емаил, телефон, урл и т.д.)
+	SmartFormValidator.prototype._validateInput = function (el) {
+		switch (el.field) {
+			case 'checkbox':
+				return (function(value) {
+					return value;
+				})(el.$el.checked);
 			default:
 				return (function(value) {
-					var error = 0
-					if (!value) {
-						error++;
+					if (el.field === 'email') {
+						var regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+						return value ? regExp.test(value) : null;
 					}
-					return !error;
+					return value;
 				})(el.$el.value);
 		}
 	};
 
+	// выводит ошибки и проставляет классы родительскому контейнеру
 	SmartFormValidator.prototype._outErrors = function () {
-		var self = this;
-		this.formControls.forEach(function(el) {
-			var parent = el.$el.parentNode;
-			if (el.error && el.changed) {
-				classie.add(parent, self._params.classNameError);
-				classie.add(el.$el, '_error');
-			} else {
-				classie.remove(parent, self._params.classNameError);
-				classie.remove(el.$el, '_error');
+		this.errors = 0;
+
+		for (var inputName in this.inputs) {
+			var input = this.inputs[inputName];
+			var parent = input.$el.parentNode;
+			var $errorDiv = parent.querySelector(this._params.selectorErrorDiv);
+
+			if (input.error) {
+				this.errors++;
 			}
 
-			if (!el.error && el.valid && el.changed) {
-				classie.add(parent, self._params.classNameActive);
+			if (input.error && input.changed) {
+				if ($errorDiv && this._params.displayError) {
+					if (this._params.customValidation.hasOwnProperty(input.name)) {
+						$errorDiv.innerText = this._params.customValidation[inputName].errorText;
+					} else {
+						$errorDiv.innerText = this._params.defaultErrorText;
+					}
+				}
+				classie.add(parent, this._params.classNameError);
+				classie.add(input.$el, '_error');
+			} else {
+				if ($errorDiv) {
+					$errorDiv.innerText = '';
+				}
+				classie.remove(parent, this._params.classNameError);
+				classie.remove(input.$el, '_error');
 			}
-		});
+
+			if (!input.error && input.valid && input.changed) {
+				classie.add(parent, this._params.classNameActive);
+			}
+		}
 
 		this.$submitBtn.disabled = this.errors > 0;
 	};
 
-	SmartFormValidator.prototype._resetForm = function () {
+	// сбрасывает значения формы и все классы с ошибками (example: может быть вызвана после успешной отправки формы)
+	SmartFormValidator.prototype.resetForm = function () {
 		var self = this;
 		this.$formControls.forEach(function(el) {
 			el.value = '';

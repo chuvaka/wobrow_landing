@@ -1,6 +1,4 @@
 $(function() {
-	// var watcherScroll = new WatcherScrollPage();
-
 	var callbackForm = new SmartFormValidator('.js-modal-form-callback');
 	var orderForm = new SmartFormValidator('.js-form-order');
 
@@ -20,56 +18,121 @@ $(function() {
 	// 	focusOnSelect: false
 	// });
 
+	var headerHeight = $('.js-header').height(),
+		$nav = $('.js-nav'),
+		$navLinks = $nav.find('.nav__link'),
+		$scrollItems = $navLinks.map(function () {
+			var item = $($(this).attr('href'));
+			if (item.length) {
+				return item;
+			}
+		});
+
+	var $logo = $('.js-logo');
+	$logo.on('click', function (ev) {
+		ev.preventDefault();
+		$('html, body').animate({scrollTop: 0}, 750);
+	});
+
+	// скролинг страницы и установка активного пункта навигации
+	window.addEventListener( 'scroll', function( event ) {
+		var scrollTop = $(this).scrollTop(),
+			fromTop = scrollTop + $nav.outerHeight() + headerHeight,
+			cur = $scrollItems.map(function () {
+				if ($(this).offset().top < (fromTop + 100))
+					return this;
+			});
+
+		cur = cur[cur.length - 1];
+		var id = (cur && cur.length) ? cur.prop('id') : '';
+
+		$navLinks.removeClass('_active').filter("[href='#" + id + "']").addClass('_active');
+	}, false );
+
+	// ПРОКРУТКА ПО SECTION
+	$navLinks.on('click', function (e) {
+		e.preventDefault();
+		var target = $(this).attr('href'),
+			offset,
+			delta;
+
+		if (!target.length)
+			return false;
+		delta = ($(this).data('delta-offset')) ? parseInt($(this).data('delta-offset')) : 0;
+		offset = $(target).offset().top - headerHeight + delta;
+
+		if (target == '#hello') {
+			offset -= 100;
+		}
+
+		$('html, body').animate({scrollTop: offset}, 750);
+	});
+
+	$('.js-scroll-to').on('click', function (e) {
+		e.preventDefault();
+		var target = '#order',
+			offset,
+			delta;
+
+		if (!target.length)
+			return false;
+		delta = ($(this).data('delta-offset')) ? parseInt($(this).data('delta-offset')) : 0;
+		offset = $(target).offset().top - headerHeight + delta;
+
+		$('html, body').animate({scrollTop: offset}, 750);
+		$('#order-input').focus();
+	});
+
 	var navDiv = document.querySelector('.js-header-nav');
 	var burger = document.querySelector('.js-burger'),
 		burgerBtn = document.querySelector('button'),
 		burgerLabel = burger.querySelector('span');
-	burgerBtn.addEventListener('click', function (e) {
-		e.preventDefault();
+
+	var burgerFunc = function (event) {
+		event.preventDefault();
 		classie.toggle(this, '_opened');
 		burgerLabel.innerText = classie.has(this, '_opened') ? 'закрыть' : 'меню';
 		classie.toggle(navDiv, '_opened');
-	});
+	}
+	burgerBtn.addEventListener('click', burgerFunc);
 
-	$('.js-form-submit').on('click', function(event) {
+	//$('.js-phone').mask('+7 (999) 999-9999');
+
+	$('.js-order-submit').on('click', function(event) {
 		event.preventDefault();
-		var error = 0;
 		var form = $(this).parent().parent();
 		var $name = form.find('[name="name"]');
-		// if (!name) {
-		// 	classie.add(name, '_error');
-		// 	error++;
-		// };
+		var $phone = form.find('[name="phone"]');
 		var $email = form.find('[name="email"]');
-		var $msg = form.find('[name="msg"]');
+
+		var $formItems = form.find('.form__item');
 
 		var requestParams = {
 			name: $name.val(),
+			phone: $phone.val(),
 			email: $email.val(),
-			msg: $msg.val()
 		};
 
-		if(!error) {
-			$.ajax({
-				async: true,
-				type: "POST",
-				url: "/ajax/feedback.php",
-				dataType: "json",
-				data: requestParams,
-				success: function(response) {
-					console.log(response)
-				},
-				error: function(error) {
-					console.log(error)
-				}
-			});
-		};
+		$.ajax({
+			async: true,
+			type: "POST",
+			url: "/ajax/order.php",
+			dataType: "json",
+			data: requestParams,
+			success: function(response) {
+				console.log(response)
+			},
+			error: function(error) {
+				console.log(error)
+			}
+		});
 
 		(function() {
 			requestParams = {};
 			$name.val('');
+			$phone.val('');
 			$email.val('');
-			$msg.val('');
+			$formItems.removeClass('form__item_active', 'form__item_focused');
 		})();
 
 		return false;

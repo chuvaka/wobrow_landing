@@ -8,6 +8,17 @@
 	&__group
 		position: relative
 		width: 100%
+		&-btn
+			margin-top: 25px
+	&__agree
+		display: inline-block
+		vertical-align: middle
+		padding-left: 25px
+		max-width: 450px
+		& p
+			font-size: 1.2rem
+			line-height: 1.5
+			margin-bottom: 0
 	&__item
 		position: relative
 		display: inline-block
@@ -107,6 +118,20 @@
 		transition: all 0.3s
 		&:focus
 			color: #252525
+@media (max-width: 991px)
+	.form
+		&-order
+			text-align: center
+			& .form__group
+				display: inline-block
+				width: 85%
+@media (max-width: 767px)
+	.form
+		&__agree
+			display: block
+			padding-top: 15px
+			padding-left: 0
+			text-align: center
 
 .steps
 	position: relative

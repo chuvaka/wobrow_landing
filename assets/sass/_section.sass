@@ -5,8 +5,14 @@
 	z-index: 10
 	& .btn
 		margin-top: 25px
+	&__container
+		position: relative
+		max-width: 1280px
+		width: 100%
 	&__ttl
 		margin-bottom: 25px
+	&__content
+		position: relative
 	& .content
 		position: relative
 		width: 100%
@@ -81,13 +87,31 @@
 		& .subttl
 			font-size: 2rem
 			font-weight: 400
-	&_teacher
-	&_price
+	&_about
+		padding-top: 50px
+		padding-bottom: 0
 		& .container
-			max-width: 960px
-		& p
-			font-size: 1.75rem
-
+			max-width: 980px
+		& .section__content
+			padding-bottom: 25px
+		.rina
+			position: absolute
+			right: 0
+			bottom: 0
+			height: 100%
+			width: 35%
+			overflow: hidden
+			& img
+				height: 100%
+				width: auto
+				max-width: none
+	&_price
+		border-top: 10px solid $c_blue
+		padding-top: 50px
+		& .btn
+			margin-top: 0
+		& .container
+			max-width: 980px
 	&_slider
 		background-color: #292a33
 		height: 100vh
@@ -111,7 +135,33 @@
 	&__item
 		display: table-cell
 		vertical-align: middle
+		&-phone
+			text-align: right
 	&__form
 		margin-top: 45px
 	& p
 		margin-bottom: 0
+@media (max-width: 991px)
+	.order
+		&__bonus
+			text-align: center
+			& .order-row
+				display: block
+			& .order__item
+				display: block
+				text-align: center
+				&-phone
+					margin-top: 25px
+					text-align: center
+@media (max-width: 767px)
+	.section
+		&_hello
+			padding-top: 10rem
+		&_about
+			padding-top: 25px
+			& .rina
+				display: none
+		&_price
+			padding-top: 25px
+			padding-bottom: 25px
+

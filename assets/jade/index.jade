@@ -9,25 +9,10 @@ html
 				include inc/section_2
 				include inc/section_for
 				include inc/section_course
-				section.section.section_center.section_teacher
+				include inc/section_teacher
+				section#order.section.section_price(data-section="order")
 					.container
-						h2.ttl.ttl_h2 Курс ведет
-						.content
-							.author
-								.author__avatar
-									img(src="img/ava.png")
-								h3.author__name Рина Кудряшова
-								.author__info
-									p Мастер-бровист с опытом более 1000 процедур, опытный администратор и организатор салонов красоты с опытом более 6 лет. Призёр международных чемпионатов среди <b>brow-мастеров</b>
-							.instalenta лента из инстаграмма с самыми пиздатыми работами
-				section.section.section_center.section_reviews
-					.container
-						h2.ttl.ttl_h2 Отзывы
-						.content
-							p отзывы
-				section.section.section_price
-					.container
-						h2.ttl.ttl_h2 Набор открыт
+						h2.ttl.ttl_h2 Открыт набор на <span class="blue">март</span>
 						.order__row.order__prices
 							.order__item.order__price-ttl.col-4
 								span Стоимость обучения
@@ -35,10 +20,10 @@ html
 								span 15 000 рублей
 							.order__item.order__price-ttl.col-4.txt-right
 								span старт курса с 1 марта
-						.order__row
-							.order__item.col-6
-								.order__item-txt Позвони и запишись на обучение, а также узнай как можно сэкономить до 30% по телефону
-							.order__item.col-6.txt-right
+						.order__row.order__bonus
+							.order__item.col-6.col-md-12
+								.order__item-txt Позвони и запишись на ранее бронирование и получи скидку <b>20%</b> по телефону
+							.order__item.order__item-phone.col-6.col-md-12
 								.ttl.ttl_phone
 									a(href="tel:+79615128172")
 										span +7 961 512-81-72
@@ -46,20 +31,22 @@ html
 							form.form.form-order.js-form-order(action="/ajax/order.php" method="POST")
 								.form__group
 									.row
-										.col.col-4
+										.col.col-4.col-md-12
 											.form__item
-												input.form-control.form__input._required(type="text" name="name" value="" _required data-type="text")
+												input#order-input.form__control.form__input._required(type="text" name="name" value="" _required data-type="text")
 												label.form__label Имя
-										.col.col-4
+										.col.col-4.col-md-12
 											.form__item
-												input.form-control.form__input._required(type="text" name="phone" value="" _required data-type="phone")
+												input.js-phone.form__control.form__input._required(type="text" name="phone" value="" _required data-type="phone")
 												label.form__label Телефон
-										.col.col-4
+										.col.col-4.col-md-12
 											.form__item
-												input.form-control.form__input._required(type="text" name="email" value="" _required data-type="email")
+												input.form__control.form__input._required(type="text" name="email" value="" data-type="email")
 												label.form__label E-mail
 								.form__group.form__group-btn
-									button.btn.js-form-submit(type="submit")
-										span Записаться на обучение
+									button.btn.js-form-submit.js-order-submit(type="submit")
+										span Оставить заявку
+									.form__agree
+										p Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с политикой конфиденциальности
 		include inc/footer
 		include inc/modal
