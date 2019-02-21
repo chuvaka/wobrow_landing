@@ -105,7 +105,7 @@
 				height: 100%
 				width: auto
 				max-width: none
-	&_price
+	&_order
 		border-top: 10px solid $c_blue
 		padding-top: 50px
 		& .btn
@@ -139,13 +139,21 @@
 			text-align: right
 	&__form
 		margin-top: 45px
+		&-answer
+			& .ttl
+				border-radius: 7px 
+				display: inline-block
+				background-color: rgba(0, 102, 255, .15)
+				padding: 10px 15px
 	& p
 		margin-bottom: 0
 @media (max-width: 991px)
 	.order
+		&__prices
+			& .order
 		&__bonus
 			text-align: center
-			& .order-row
+			&.order__row
 				display: block
 			& .order__item
 				display: block
@@ -161,7 +169,17 @@
 			padding-top: 25px
 			& .rina
 				display: none
-		&_price
+		&_order
 			padding-top: 25px
 			padding-bottom: 25px
+	.order
+		&__form
+			margin-top: 25px
+		&__prices
+			margin: 25px 0
+			&.order__row
+				display: block
+			& .order__item
+				display: block
+				text-align: center
 

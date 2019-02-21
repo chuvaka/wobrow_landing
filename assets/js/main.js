@@ -65,6 +65,11 @@ $(function() {
 			offset -= 100;
 		}
 
+		classie.remove(document.body, 'body-md');
+		classie.remove(burgerBtn, '_opened');
+		burgerLabel.innerText = classie.has(burgerBtn, '_opened') ? 'закрыть' : 'меню';
+		classie.remove(navDiv, '_opened');
+
 		$('html, body').animate({scrollTop: offset}, 750);
 	});
 
@@ -90,6 +95,7 @@ $(function() {
 
 	var burgerFunc = function (event) {
 		event.preventDefault();
+		classie.toggle(document.body, 'body-md');
 		classie.toggle(this, '_opened');
 		burgerLabel.innerText = classie.has(this, '_opened') ? 'закрыть' : 'меню';
 		classie.toggle(navDiv, '_opened');
@@ -97,6 +103,8 @@ $(function() {
 	burgerBtn.addEventListener('click', burgerFunc);
 
 	//$('.js-phone').mask('+7 (999) 999-9999');
+
+	var orderForm = $('.order__form');
 
 	$('.js-order-submit').on('click', function(event) {
 		event.preventDefault();
@@ -121,11 +129,24 @@ $(function() {
 			data: requestParams,
 			success: function(response) {
 				console.log(response)
+				orderForm.find('.order__form-answer').removeClass('hide');
+				orderForm.find('.order__form-answer > .ttl').text(response.message);
+				form.addClass('hide');
+				setTimeout(function() {
+					orderForm.find('.order__form-answer').fadeOut('slow');
+				}, 3000);
 			},
 			error: function(error) {
 				console.log(error)
 			}
 		});
+
+		orderForm.find('.order__form-answer').removeClass('hide');
+		orderForm.find('.order__form-answer > .ttl').text('Спасибо! Ваша заявка отправлена.');
+		form.addClass('hide');
+		setTimeout(function() {
+			orderForm.find('.order__form-answer').fadeOut('slow');
+		}, 3000);
 
 		(function() {
 			requestParams = {};

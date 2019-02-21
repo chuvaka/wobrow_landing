@@ -9,44 +9,7 @@ html
 				include inc/section_2
 				include inc/section_for
 				include inc/section_course
-				include inc/section_teacher
-				section#order.section.section_price(data-section="order")
-					.container
-						h2.ttl.ttl_h2 Открыт набор на <span class="blue">март</span>
-						.order__row.order__prices
-							.order__item.order__price-ttl.col-4
-								span Стоимость обучения
-							.order__item.order__price.col-4.txt-center
-								span 15 000 рублей
-							.order__item.order__price-ttl.col-4.txt-right
-								span старт курса с 1 марта
-						.order__row.order__bonus
-							.order__item.col-6.col-md-12
-								.order__item-txt Позвони и запишись на ранее бронирование и получи скидку <b>20%</b> по телефону
-							.order__item.order__item-phone.col-6.col-md-12
-								.ttl.ttl_phone
-									a(href="tel:+79615128172")
-										span +7 961 512-81-72
-						.order__form
-							form.form.form-order.js-form-order(action="/ajax/order.php" method="POST")
-								.form__group
-									.row
-										.col.col-4.col-md-12
-											.form__item
-												input#order-input.form__control.form__input._required(type="text" name="name" value="" _required data-type="text")
-												label.form__label Имя
-										.col.col-4.col-md-12
-											.form__item
-												input.js-phone.form__control.form__input._required(type="text" name="phone" value="" _required data-type="phone")
-												label.form__label Телефон
-										.col.col-4.col-md-12
-											.form__item
-												input.form__control.form__input._required(type="text" name="email" value="" data-type="email")
-												label.form__label E-mail
-								.form__group.form__group-btn
-									button.btn.js-form-submit.js-order-submit(type="submit")
-										span Оставить заявку
-									.form__agree
-										p Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с политикой конфиденциальности
+				include inc/section_about
+				include inc/section_order
 		include inc/footer
 		include inc/modal
