@@ -197,7 +197,7 @@
 						return value ? regExp.test(value) : null;
 					}
 					return value;
-				})(el.$el.value);
+				})(el.$el.value.trim());
 		}
 	};
 
