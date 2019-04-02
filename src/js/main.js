@@ -1,6 +1,29 @@
 $(function() {
 	var callbackForm = new SmartFormValidator('.js-modal-form-callback');
-	var orderForm = new SmartFormValidator('.js-form-order');
+	var orderForm = new SmartFormValidator(
+		'.js-form-order',
+		{
+			customValidation: {
+				phone: {
+					empty: {
+						errorText: 'необходимо заполнить поле Телефон'
+					},
+					invalid: {
+						errorText: 'неверно введён номер телефона "+79991234567"'
+					}
+				},
+				email: {
+					empty: {
+						errorText: 'необходимо заполнить поле Email'
+					},
+					invalid: {
+						errorText: 'не сможем отправить письмо по этому адресу. email должен быть следующего формата, например, mymail@mailbox.ru'
+					}
+				}
+			},
+			disableSubmitBtn: true,
+			displayError: true
+		});
 
 	// if (document.querySelector('.js-tabs')) {
 	// 	var tabs = new Tabs('.js-tabs');
@@ -102,7 +125,7 @@ $(function() {
 	}
 	burgerBtn.addEventListener('click', burgerFunc);
 
-	//$('.js-phone').mask('+7 (999) 999-9999');
+	$('.js-phone').mask('+79999999999');
 
 	var orderForm = $('.order__form');
 

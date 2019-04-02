@@ -1,40 +1,43 @@
 section#order.section.section_order(data-section="order")
-					.container
-						h2.ttl.ttl_h2 Открыт набор на <span class="blue">март</span>
-						.order__row.order__prices
-							.order__item.order__price-ttl.col-4.col-sm-12
-								span Стоимость обучения
-							.order__item.order__price.col-4.col-sm-12.txt-center
-								span 15 000 рублей
-							.order__item.order__price-ttl.col-sm-12.col-4.txt-right
-								span старт курса с 1 марта
-						.order__row.order__bonus
-							.order__item.col-6.col-md-12
-								.order__item-txt Напиши мне в Whatsapp и получи скидку <b>20%</b><br/> при раннем бронировании курса
-							.order__item.order__item-phone.col-6.col-md-12
-								.ttl.ttl_phone
-									a.no-border(href="https://api.whatsapp.com/send?phone=79615128172" title="Записаться на курс")
-										span +7 961 512-81-72
-						.order__form
-							.order__form-answer.txt-center.hide
-								.ttl.ttl-h3
-							form.form.form-order.js-form-order(action="/ajax/order.php" method="POST")
-								.form__group
-									.row
-										.col.col-4.col-md-12
-											.form__item
-												input#order-input.form__control.form__input._required(type="text" name="name" value="" _required data-type="text")
-												label.form__label Имя
-										.col.col-4.col-md-12
-											.form__item
-												input.js-phone.form__control.form__input._required(type="text" name="phone" value="" _required data-type="phone")
-												label.form__label Телефон
-										.col.col-4.col-md-12
-											.form__item
-												input.form__control.form__input._required(type="text" name="email" value="" data-type="email")
-												label.form__label E-mail
-								.form__group.form__group-btn
-									button.btn.js-form-submit.js-order-submit(type="submit")
-										span Оставить заявку
-									.form__agree
-										p Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с политикой конфиденциальности
+	.container
+		h2.ttl.ttl_h2 Открыт набор на <span class="blue">март</span>
+		.order__row.order__prices
+			.order__item.order__price-ttl.col-6.col-sm-12
+				span Стоимость обучения
+			.order__item.order__price.col-6.col-sm-12.txt-center
+				span 15 000 рублей
+			//- .order__item.order__price-ttl.col-sm-12.col-4.txt-right
+			//- 	span старт курса с 1 марта
+		.order__row.order__bonus
+			.order__item.col-6.col-md-12
+				.order__item-txt Напиши мне в Whatsapp и получи скидку <b>10%</b><br/> при раннем бронировании<sup>1</sup> курса
+				small <sup>1</sup> &ndash; доступно при внесении предоплаты в размере 2000 рублей и резервировании места на курс, который проходит не раннее чем через месяц от даты поступления платежа.
+			.order__item.order__item-phone.col-6.col-md-12
+				.ttl.ttl_phone
+					a.no-border(href="https://api.whatsapp.com/send?phone=79615128172" title="Записаться на курс")
+						span +7 961 512-81-72
+		.order__form
+			.order__form-answer.txt-center.hide
+				.ttl.ttl-h3
+			form.form.form-order.js-form-order(action="/ajax/order.php" method="POST")
+				.form__group
+					.row
+						.col.col-4
+							.form__item
+								input#order-input.form__control.form__input._required(type="text" name="name" value="" data-field="text")
+								label.form__label Имя
+						.col.col-4
+							.form__item
+								input.js-phone.form__control.form__input._required(type="text" name="phone" value="" _required data-field="phone")
+								label.form__label Телефон
+								.form__error
+						.col.col-4
+							.form__item
+								input.form__control.form__input._required(type="text" name="email" value="" _required data-field="email")
+								label.form__label E-mail
+								.form__error
+				.form__group.form__group-btn
+					button.btn.js-form-submit.js-order-submit(type="submit")
+						span Оставить заявку
+					.form__agree
+						p Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с политикой конфиденциальности

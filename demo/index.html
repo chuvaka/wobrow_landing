@@ -39,25 +39,15 @@
               </div>
               <div class="col col-6 col-md-12">
                 <div class="hello-video">
-                  <button class="btn-play">
-                    <svg width="76" height="76" viewBox="0 0 76 76" preserveAspectRatio="xMidYMid meet" xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <path d="M53.8230453,36.4639805 L32.3168724,24.3186813 C31.5322359,23.8937729 30.7475995,23.8937729 30.0342936,24.3186813 C29.3209877,24.7435897 29,25.5225885 29,26.3015873 L29,50.6630037 C29,51.4420024 29.4279835,52.2210012 30.0342936,52.6459096 C30.3909465,52.8229548 30.81893,53 31.2469136,53 C31.6748971,53 32.0315501,52.8229548 32.2812071,52.6459096 L53.78738,40.5006105 C54.5720165,40.0757021 55,39.2967033 55,38.5177045 C55,37.7387057 54.6076818,36.995116 53.8230453,36.4639805 Z" stroke="none"></path>
-                    </svg>
-                  </button>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col col-6 col-sm-12">
-                <div class="subttl"><a href="#" class="no-border"> <span>#НЕПРОБРОВИ</span></a></div>
                 <div class="txt">
-                  <p><b>Тотальное погружение</b> в профессию! Впервые обучение будет проходить <b>5 интенсивных дней</b>, за которые тебе расскажут все нюансы работы с клиентами и их бровями. Всё «от и до» в теории и на практике.</p>
-                  <p>Расскажут максимально доходчиво всё: от организации своего рабочего пространства до реализации в жизнь счастливых лиц с идеальными бровями!</p>
-                </div>
-              </div>
-              <div class="col col-6 col-sm-12">
-                <div class="txt">
-                  <p>Самые распространённые страхи начинающих мастеров: как не накосячить и где найти благодарных клиентов? Как правильно строить общение с человеком и что такое личное пространство? Ведь работа мастера это не только пинцет и парочка тюбиков с краской!</p>
+                  <p>Если ты давно искала максимально информативный и полный <strong>курс по оформлению бровей</strong> с большим количеством отработок, то ты его только что нашла!</p>
+                  <p><b>Тотальное погружение</b> в профессию!</p>
+                  <p><b>Впервые</b> обучение будет проходить <b>5 интенсивных дней</b>, за которые тебе расскажут все нюансы работы с клиентами и их бровями. Всё «от и до» в теории и на практике.</p>
                 </div>
                 <button data-scrollto="order" class="btn js-scroll-to"><span>Записаться на обучение</span></button>
               </div>
@@ -67,11 +57,22 @@
         <section class="section section_second">
           <div class="container">
             <div class="section__ttl">
-              <h2 class="ttl ttl_h2">Самый углубленный курс по бровям</h2>
+              <h2 class="ttl ttl_h2">Самый углубленный курс</h2>
               <div class="subttl">Ты действительно научишься делать преображение взгляда.</div>
             </div>
-            <div class="section__content col-9">
-              <p>Если ты давно искала максимально информативный и полный <strong>курс по оформлению бровей</strong> с большим количеством отработки, то ты его только что нашла!</p>
+            <div class="section__content col-8 col-sm-12">
+              <p>Тебе расскажут максимально доходчиво всё: от организации своего рабочего <br/>пространства до реализации в жизнь счастливых лиц с идеальными бровями!</p>
+              <p>Самые распространённые страхи начинающих мастеров:</p>
+              <ul class="list">
+                <li>Как не накупить лишнего рабочего материала?</li>
+                <li>Как не накосячить на своих первых работах?</li>
+                <li>Где найти благодарных клиентов?</li>
+                <li>Как правильно строить общение с человеком?</li>
+                <li>Что такое личное пространство?</li>
+              </ul><br/>
+              <p>Ведь работа мастера это не только пинцет и парочка тюбиков с краской!</p>
+              <div class="subttl"><strong><a href="#" class="no-border"><span>#НЕПРОБРОВИ</span></a></strong></div>
+              <p>Отдельный блок теории, в котором тебе расскажут о том, как строить не только брови, но и свой карьерный рост!</p>
             </div>
           </div>
         </section>
@@ -315,20 +316,22 @@
                   <div class="row">
                     <div class="col col-4 col-md-12">
                       <div class="form__item">
-                        <input id="order-input" type="text" name="name" value="" _required data-type="text" class="form__control form__input _required">
+                        <input id="order-input" type="text" name="name" value="" data-field="text" class="form__control form__input _required">
                         <label class="form__label">Имя</label>
                       </div>
                     </div>
                     <div class="col col-4 col-md-12">
                       <div class="form__item">
-                        <input type="text" name="phone" value="" _required data-type="phone" class="js-phone form__control form__input _required">
+                        <input type="text" name="phone" value="" _required data-field="phone" class="js-phone form__control form__input _required">
                         <label class="form__label">Телефон</label>
+                        <div class="form__error"></div>
                       </div>
                     </div>
                     <div class="col col-4 col-md-12">
                       <div class="form__item">
-                        <input type="text" name="email" value="" data-type="email" class="form__control form__input _required">
+                        <input type="text" name="email" value="" _required data-field="email" class="form__control form__input _required">
                         <label class="form__label">E-mail</label>
+                        <div class="form__error"></div>
                       </div>
                     </div>
                   </div>

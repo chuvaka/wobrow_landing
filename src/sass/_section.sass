@@ -64,11 +64,18 @@
 						fill: $link_color_hover
 	&_second
 		background-color: #232731
+		background-image: url('../img/girl-1.png')
+		background-position: right top
+		background-repeat: no-repeat
+		background-size: 43% 
 		color: #ffffff
 		padding: 5rem 0 5rem
 		& .subttl
 			font-size: 2rem
 			font-weight: 400
+		@media (max-width: 991px)
+			background-image: none
+		
 	&_program, &_get
 		padding: 2.5rem 0 3.5rem
 		& .content

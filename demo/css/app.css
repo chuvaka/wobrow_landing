@@ -1351,6 +1351,10 @@ p {
 
 .section_second {
   background-color: #232731;
+  background-image: url("../img/girl-1.png");
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: 43%;
   color: #ffffff;
   padding: 5rem 0 5rem;
 }
@@ -1358,6 +1362,12 @@ p {
 .section_second .subttl {
   font-size: 2rem;
   font-weight: 400;
+}
+
+@media (max-width: 991px) {
+  .section_second {
+    background-image: none;
+  }
 }
 
 .section_program,
