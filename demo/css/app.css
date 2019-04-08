@@ -725,6 +725,12 @@ p {
   margin-bottom: 0;
 }
 
+.form__error {
+  color: #f26b6c;
+  font-size: 1.1rem;
+  padding-top: 5px;
+}
+
 .form__item {
   position: relative;
   display: inline-block;
@@ -1441,7 +1447,6 @@ p {
   bottom: 0;
   height: 100%;
   width: 35%;
-  overflow: hidden;
 }
 
 .section_about .rina img {
